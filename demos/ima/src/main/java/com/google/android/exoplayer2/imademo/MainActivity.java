@@ -15,11 +15,13 @@
  */
 package com.google.android.exoplayer2.imademo;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import com.google.android.exoplayer2.ExoPlayer;
 
 /**
@@ -28,16 +30,24 @@ import com.google.android.exoplayer2.ExoPlayer;
  */
 public final class MainActivity extends AppCompatActivity {
 
+  //读写权限
+  private static String[] PERMISSIONS_STORAGE = {
+      Manifest.permission.READ_EXTERNAL_STORAGE,
+      Manifest.permission.WRITE_EXTERNAL_STORAGE};
+  //请求状态码
+  private static int REQUEST_PERMISSION_CODE = 1;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
     setContentView(R.layout.my_main_activity);
-
     initMyAct();
   }
 
   private void initMyAct() {
     Button button = findViewById(R.id.run_player);
+    button.setOnClickListener(listener);
   }
 
   View.OnClickListener listener = new View.OnClickListener() {

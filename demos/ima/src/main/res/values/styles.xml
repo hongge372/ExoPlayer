@@ -20,4 +20,9 @@
     <item name="android:windowBackground">@android:color/black</item>
   </style>
 
+  <style name="NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
 </resources>

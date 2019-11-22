@@ -44,7 +44,8 @@ import com.google.android.exoplayer2.util.Util;
   private long contentPosition;
 
   public PlayerManager(Context context) {
-    String adTag = context.getString(R.string.ad_tag_url);
+    String adTag = "/sdcard/VideoEdit/a.mp4";
+    //String adTag = context.getString(R.string.ad_tag_url);
     adsLoader = new ImaAdsLoader(context, Uri.parse(adTag));
     dataSourceFactory =
         new DefaultDataSourceFactory(
@@ -58,7 +59,8 @@ import com.google.android.exoplayer2.util.Util;
     playerView.setPlayer(player);
 
     // This is the MediaSource representing the content media (i.e. not the ad).
-    String contentUrl = context.getString(R.string.content_url);
+    //String contentUrl = context.getString(R.string.content_url);
+    String contentUrl = "/sdcard/VideoEdit/a.mp4";
     MediaSource contentMediaSource = buildMediaSource(Uri.parse(contentUrl));
 
     // Compose the content media source into a new AdsMediaSource with both ads and content.
