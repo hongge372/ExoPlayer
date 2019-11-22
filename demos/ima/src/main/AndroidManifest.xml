@@ -23,7 +23,9 @@
   <application android:label="@string/application_name" android:icon="@mipmap/ic_launcher"
       android:largeHeap="true" android:allowBackup="false">
 
-    <activity android:name="com.google.android.exoplayer2.imademo.MainActivity"
+    <activity android:name=".MainActivity"/>
+
+    <activity android:name=".PlayerMainActivity"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
         android:label="@string/application_name"
         android:theme="@style/PlayerTheme">

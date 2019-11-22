@@ -15,43 +15,44 @@
  */
 package com.google.android.exoplayer2.imademo;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
 
 /**
- * Main Activity for the IMA plugin demo. {@link ExoPlayer} objects are created by {@link
- * PlayerManager}, which this class instantiates.
+ * Main Activity for the IMA plugin demo. {@link ExoPlayer} objects are created by
+ * {@link PlayerManager}, which this class instantiates.
  */
-public final class MainActivity extends AppCompatActivity {
+public final class PlayerMainActivity extends Activity {
+
+  private PlayerView playerView;
+  private PlayerManager player;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.my_main_activity);
-
-    initMyAct();
+    setContentView(R.layout.main_activity);
+    playerView = findViewById(R.id.player_view);
+    player = new PlayerManager(this);
   }
 
-  private void initMyAct() {
-    Button button = findViewById(R.id.run_player);
+  @Override
+  public void onResume() {
+    super.onResume();
+    player.init(this, playerView);
   }
 
-  View.OnClickListener listener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      Intent intent = new Intent();
-      switch (v.getId()) {
-        case R.id.run_player:
-          intent.setClass(MainActivity.this, PlayerMainActivity.class);
-          startActivity(intent);
-          break;
-        default:
-          break;
-      }
-    }
-  };
+  @Override
+  public void onPause() {
+    super.onPause();
+    player.reset();
+  }
+
+  @Override
+  public void onDestroy() {
+    player.release();
+    super.onDestroy();
+  }
+
 }
